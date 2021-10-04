@@ -15,12 +15,12 @@ public class AccountController {
 	
 	ArrayList<Account> accountList = new ArrayList<Account>();
 	
-	@GetMapping("/account/{name}")
+	@GetMapping("/account/{name}")  // localhost:8080/account/Aeras
 	public Account getAccount(@PathVariable String name) {
 		
-		System.out.println(name);
+		
 		for(Account account : accountList) {
-			System.out.println(account.getOwnerName() + " -- ");
+			
 			if(account.getOwnerName().equals(name))
 				return account;
 		}

@@ -14,6 +14,12 @@ public class Account {
 	private Status status;
 	private Date creationDate;
 	
+	/*
+	 *  {
+	 *  	"ownername":"asdfasd",
+	 *  
+	 *  }
+	 */
 	// Constructor
 	public Account(String ownerName, Address address, float amount, AccountType accountType, Status status) {
 		super();
@@ -88,6 +94,7 @@ public class Account {
 	public void createAccount() {
 		
 		
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter your name");
 		this.ownerName = scanner.next();

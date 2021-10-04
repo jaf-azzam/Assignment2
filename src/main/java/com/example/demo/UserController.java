@@ -1,18 +1,32 @@
 package com.example.demo;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-public class UserController {
+@RestController("user")
+public class UserController {	// POJO plain old java object
+	
+	@Autowired
+	UserService userService;
+	
+	
+	
 	
 	@GetMapping("/")
-	void call() {		
+	List<User> getUser() {
 		System.out.println("Called . . . !");
+		return userService.getUsers();
+		
+		
 	}
 	
 	@GetMapping("/{id}")
@@ -22,9 +36,10 @@ public class UserController {
 	
 	
 	@PostMapping
-	String postCall(@RequestBody User user) {
-		System.out.println("Got User " + user.getName());
-		return "Post called";
+	@ResponseStatus(code = HttpStatus.CREATED)
+	Long saveUser(@RequestBody User user) {
+		
+		return userService.save(user);
 	}
 	
 	@PutMapping
